@@ -295,7 +295,31 @@ http://localhost:8080/swagger-ui/index.html
 
 ## 📸 Screenshots
 
-*(Add screenshots here)*
+### 🔐 Login
+![Login](screenshots/Login.png)
+
+### 📝 Register
+![Register](screenshots/Register.png)
+
+### 🛡️ Admin Dashboard
+![Admin Dashboard](screenshots/Admin_Dashboard.png)
+
+### 📊 Admin – All Appointments
+![Admin All Appointments](screenshots/Admin_AllAppointments.png)
+
+### 👨‍⚕️ Doctor Management
+![Doctor Management](screenshots/Doctor_Management.png)
+
+### 👤 User Dashboard
+![User Dashboard](screenshots/User_Dashboard.png)
+
+### 📅 Book Appointment
+![Book Appointment](screenshots/Book_Appointment.png)
+
+![Book Appointment 2](screenshots/Book_Appointmrnt(1).png)
+
+### 📋 My Appointments
+![User Appointments](screenshots/User_Appointments.png)
 
 ---
 
