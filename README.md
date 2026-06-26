@@ -337,4 +337,4 @@ http://localhost:8080/swagger-ui/index.html
 **Praveen Naik**  
 GitHub: [@praveennaik94](https://github.com/praveennaik94)  
 Email: naikp3256@gmail.com  
-LinkedIn: [linkedin.com/in/praveen-naik](https://linkedin.com/in/praveen-naik)
+LinkedIn: [linkedin.com/in/praveen-naik](https://www.linkedin.com/in/islavath-praveen-naik/)
