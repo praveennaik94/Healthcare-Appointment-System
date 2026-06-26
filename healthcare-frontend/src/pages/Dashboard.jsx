@@ -37,49 +37,112 @@ function Dashboard() {
     const logout = () => {
 
         localStorage.removeItem("token");
+        localStorage.removeItem("role");
+
         navigate("/");
 
     };
 
     return (
 
-    <div className="container mt-5">
+        <div className="container mt-5">
 
-        {/* Welcome Card */}
+            {/* Welcome Card */}
 
-        <div className="card shadow-sm border-0 mb-4">
+            <div className="card shadow-sm border-0 mb-4">
 
-            <div className="card-body">
+                <div className="card-body">
 
-                <h2 className="fw-bold">
-                    Welcome 👋
-                </h2>
+                    <h2 className="fw-bold">
+                        Welcome 👋
+                    </h2>
 
-                <p className="text-muted mb-0">
-                    Manage your healthcare appointments quickly and easily.
-                </p>
+                    <p className="text-muted mb-0">
+                        Manage your healthcare appointments quickly and easily.
+                    </p>
+
+                </div>
 
             </div>
 
-        </div>
+            <h3 className="text-center mb-4">
+                Healthcare Appointment Dashboard
+            </h3>
 
-        <h3 className="text-center mb-4">
-            Healthcare Appointment Dashboard
-        </h3>
+            <div className="row">
 
-        <div className="row">
+                <div className="col-md-3 mb-3">
 
-            <div className="col-md-3 mb-3">
+                    <div className="card text-white bg-primary shadow h-100 text-center">
 
-                <div className="card text-white bg-primary shadow h-100 text-center">
+                        <div className="card-body">
 
-                    <div className="card-body">
+                            <h1>📋</h1>
 
-                        <h1>📋</h1>
+                            <h5>Total Appointments</h5>
 
-                        <h5>Total Appointments</h5>
+                            <h2>{stats.totalAppointments}</h2>
 
-                        <h2>{stats.totalAppointments}</h2>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div className="col-md-3 mb-3">
+
+                    <div className="card text-white bg-success shadow h-100 text-center">
+
+                        <div className="card-body">
+
+                            <h1>✅</h1>
+
+                            <h5>Booked</h5>
+
+                            <h2>{stats.bookedAppointments}</h2>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div className="col-md-3 mb-3">
+
+                    <div className="card text-white bg-danger shadow h-100 text-center">
+
+                        <div className="card-body">
+
+                            <h1>❌</h1>
+
+                            <h5>Cancelled</h5>
+
+                            <h2>{stats.cancelledAppointments}</h2>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div className="col-md-3 mb-3">
+
+                    <div className="card shadow h-100 text-center">
+
+                        <div className="card-body">
+
+                            <h1>🚪</h1>
+
+                            <h5>Logout</h5>
+
+                            <button
+                                className="btn btn-danger mt-2"
+                                onClick={logout}
+                            >
+                                Logout
+                            </button>
+
+                        </div>
 
                     </div>
 
@@ -87,58 +150,49 @@ function Dashboard() {
 
             </div>
 
-            <div className="col-md-3 mb-3">
+            <div className="row mt-4">
 
-                <div className="card text-white bg-success shadow h-100 text-center">
+                <div className="col-md-6 mb-3">
 
-                    <div className="card-body">
+                    <div className="card shadow h-100">
 
-                        <h1>✅</h1>
+                        <div className="card-body text-center">
 
-                        <h5>Booked</h5>
+                            <h1>👨‍⚕️</h1>
 
-                        <h2>{stats.bookedAppointments}</h2>
+                            <h4>Book Appointment</h4>
 
-                    </div>
+                            <button
+                                className="btn btn-primary mt-3"
+                                onClick={() => navigate("/book")}
+                            >
+                                Open
+                            </button>
 
-                </div>
-
-            </div>
-
-            <div className="col-md-3 mb-3">
-
-                <div className="card text-white bg-danger shadow h-100 text-center">
-
-                    <div className="card-body">
-
-                        <h1>❌</h1>
-
-                        <h5>Cancelled</h5>
-
-                        <h2>{stats.cancelledAppointments}</h2>
+                        </div>
 
                     </div>
 
                 </div>
 
-            </div>
+                <div className="col-md-6 mb-3">
 
-            <div className="col-md-3 mb-3">
+                    <div className="card shadow h-100">
 
-                <div className="card shadow h-100 text-center">
+                        <div className="card-body text-center">
 
-                    <div className="card-body">
+                            <h1>📅</h1>
 
-                        <h1>🚪</h1>
+                            <h4>My Appointments</h4>
 
-                        <h5>Logout</h5>
+                            <button
+                                className="btn btn-success mt-3"
+                                onClick={() => navigate("/appointments")}
+                            >
+                                View
+                            </button>
 
-                        <button
-                            className="btn btn-danger mt-2"
-                            onClick={logout}
-                        >
-                            Logout
-                        </button>
+                        </div>
 
                     </div>
 
@@ -148,82 +202,8 @@ function Dashboard() {
 
         </div>
 
-        <div className="row mt-4">
+    );
 
-    <div className="col-md-4 mb-3">
-
-        <div className="card shadow h-100">
-
-            <div className="card-body text-center">
-
-                <h1>👨‍⚕️</h1>
-
-                <h4>Book Appointment</h4>
-
-                <button
-                    className="btn btn-primary mt-3"
-                    onClick={() => navigate("/book")}
-                >
-                    Open
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div className="col-md-4 mb-3">
-
-        <div className="card shadow h-100">
-
-            <div className="card-body text-center">
-
-                <h1>📅</h1>
-
-                <h4>My Appointments</h4>
-
-                <button
-                    className="btn btn-success mt-3"
-                    onClick={() => navigate("/appointments")}
-                >
-                    View
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div className="col-md-4 mb-3">
-
-        <div className="card shadow h-100">
-
-            <div className="card-body text-center">
-
-                <h1>🩺</h1>
-
-                <h4>Manage Doctors</h4>
-
-                <button
-                    className="btn btn-warning mt-3 w-100"
-                    onClick={() => navigate("/doctors")}
-                >
-                    Manage Doctors
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-    </div>
-
-);
 }
 
 export default Dashboard;

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../services/api";
 import { toast } from "react-toastify";
+import { jwtDecode } from "jwt-decode";
 
 function Login() {
 
@@ -34,13 +35,23 @@ function Login() {
                 formData
             );
 
-            localStorage.setItem("token", response.data.token);
+            const token = response.data.token;
 
-            setLoading(false);
+localStorage.setItem("token", token);
 
-            toast.success("Login Successful");
+const decoded = jwtDecode(token);
 
-            navigate("/dashboard");
+localStorage.setItem("role", decoded.role);
+
+setLoading(false);
+
+toast.success("Login Successful");
+
+if (decoded.role === "ADMIN") {
+    navigate("/admin-dashboard");
+} else {
+    navigate("/dashboard");
+}
 
         } catch (error) {
 

@@ -43,4 +43,6 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
             LocalTime slot,
             String status
     );
+
+    long countByStatus(String status);
 }

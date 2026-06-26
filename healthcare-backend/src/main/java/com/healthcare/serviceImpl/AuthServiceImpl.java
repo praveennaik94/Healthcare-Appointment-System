@@ -4,6 +4,7 @@ import com.healthcare.dto.AuthResponse;
 import com.healthcare.dto.LoginRequest;
 import com.healthcare.dto.RegisterRequest;
 import com.healthcare.entity.User;
+import com.healthcare.enums.Role;
 import com.healthcare.repository.UserRepository;
 import com.healthcare.security.JwtService;
 import com.healthcare.service.AuthService;
@@ -35,7 +36,7 @@ public class AuthServiceImpl implements AuthService {
                 .name(request.getName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role("USER")
+                .role(Role.USER)
                 .createdAt(LocalDateTime.now())
                 .build();
 
@@ -54,7 +55,10 @@ public class AuthServiceImpl implements AuthService {
                 )
         );
 
-        String token = jwtService.generateToken(request.getEmail());
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        String token = jwtService.generateToken(user);
 
         return new AuthResponse(token);
     }

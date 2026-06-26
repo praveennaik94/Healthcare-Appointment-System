@@ -17,6 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import com.healthcare.email.EmailService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -30,6 +31,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     private final AppointmentRepository appointmentRepository;
     private final UserRepository userRepository;
     private final AppointmentProducer appointmentProducer;
+    private final EmailService emailService;
 
     private User getLoggedInUser() {
 
@@ -69,7 +71,18 @@ public class AppointmentServiceImpl implements AppointmentService {
                 .createdAt(LocalDateTime.now())
                 .build();
 
-        appointmentRepository.save(appointment);
+        Appointment savedAppointment = appointmentRepository.save(appointment);
+
+        emailService.sendEmail(
+                user.getEmail(),
+                "Appointment Booked Successfully",
+                "Hello " + user.getName() + ",\n\n" +
+                        "Your appointment has been booked successfully.\n\n" +
+                        "Doctor: " + appointment.getDoctorName() + "\n" +
+                        "Date: " + appointment.getAppointmentDate() + "\n" +
+                        "Time: " + appointment.getSlot() + "\n\n" +
+                        "Thank you for using Healthcare Appointment Management System."
+        );
 
         AppointmentEvent event = AppointmentEvent.builder()
                 .appointmentId(appointment.getId())
@@ -118,6 +131,17 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointment.setStatus("CANCELLED");
 
         appointmentRepository.save(appointment);
+
+        emailService.sendEmail(
+                user.getEmail(),
+                "Appointment Cancelled",
+                "Hello " + user.getName() + ",\n\n" +
+                        "Your appointment has been cancelled.\n\n" +
+                        "Doctor: " + appointment.getDoctorName() + "\n" +
+                        "Date: " + appointment.getAppointmentDate() + "\n" +
+                        "Time: " + appointment.getSlot() + "\n\n" +
+                        "Thank you."
+        );
 
         return "Appointment Cancelled Successfully";
     }
@@ -243,6 +267,20 @@ public class AppointmentServiceImpl implements AppointmentService {
 
         appointment.setAppointmentDate(request.getAppointmentDate());
         appointment.setSlot(request.getSlot());
+
+        Appointment updatedAppointment = appointmentRepository.save(appointment);
+
+        emailService.sendEmail(
+                updatedAppointment.getUser().getEmail(),
+                "Appointment Rescheduled Successfully",
+                "Hello " + updatedAppointment.getUser().getName() + ",\n\n" +
+                        "Your appointment has been rescheduled successfully.\n\n" +
+                        "Doctor: " + updatedAppointment.getDoctorName() + "\n" +
+                        "New Date: " + updatedAppointment.getAppointmentDate() + "\n" +
+                        "New Time: " + updatedAppointment.getSlot() + "\n\n" +
+                        "Thank you for using Healthcare Appointment Management System."
+        );
+
 
         return appointmentRepository.save(appointment);
     }

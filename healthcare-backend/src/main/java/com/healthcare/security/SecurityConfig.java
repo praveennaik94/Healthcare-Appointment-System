@@ -41,15 +41,43 @@ public class SecurityConfig {
                         UsernamePasswordAuthenticationFilter.class
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
+
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
                         .requestMatchers(
                                 "/api/auth/**",
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html"
                         ).permitAll()
-                        .anyRequest()
-                        .authenticated()
+
+                                // USER + ADMIN (Read doctors)
+                                .requestMatchers(HttpMethod.GET,
+                                        "/api/doctors",
+                                        "/api/doctors/available",
+                                        "/api/doctors/*")
+                                .hasAnyRole("USER", "ADMIN")
+
+// ADMIN ONLY (Modify doctors)
+                                .requestMatchers(HttpMethod.POST, "/api/doctors/**")
+                                .hasRole("ADMIN")
+
+                                .requestMatchers(HttpMethod.PUT, "/api/doctors/**")
+                                .hasRole("ADMIN")
+
+                                .requestMatchers(HttpMethod.DELETE, "/api/doctors/**")
+                                .hasRole("ADMIN")
+
+// ADMIN APIs
+                                .requestMatchers("/api/admin/**")
+                                .hasRole("ADMIN")
+
+// USER + ADMIN
+                                .requestMatchers("/api/appointments/**")
+                                .hasAnyRole("USER", "ADMIN")
+
+                                .anyRequest()
+                                .authenticated()
                 );
 
         return http.build();

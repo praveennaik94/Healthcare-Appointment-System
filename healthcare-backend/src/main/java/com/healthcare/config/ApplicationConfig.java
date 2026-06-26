@@ -27,9 +27,10 @@ public class ApplicationConfig {
                             new UsernameNotFoundException("User Not Found"));
 
             return org.springframework.security.core.userdetails.User
-                    .withUsername(user.getEmail())
+                    .builder()
+                    .username(user.getEmail())
                     .password(user.getPassword())
-                    .roles(user.getRole())
+                    .roles(user.getRole().name())
                     .build();
         };
     }
