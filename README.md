@@ -22,11 +22,12 @@
 | Appointment logs / history | ✅ Done |
 | Swagger API Documentation | ✅ Done |
 | React Frontend UI | ✅ Done |
+| Dockerized deployment | ✅ Done |
 | Doctor Management (CRUD) | ✅ Beyond requirement |
 | Appointment Reschedule | ✅ Beyond requirement |
 | Dashboard with stats | ✅ Beyond requirement |
 | Real-time event status on UI | ✅ Beyond requirement |
-| Email / SMS Notifications via Python worker | ✅ Beyond requirement |
+| Email / SMS Notifications JavaMailSender | ✅ Beyond requirement |
 
 ---
 
