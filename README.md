@@ -26,6 +26,7 @@
 | Appointment Reschedule | ✅ Beyond requirement |
 | Dashboard with stats | ✅ Beyond requirement |
 | Real-time event status on UI | ✅ Beyond requirement |
+| Email / SMS Notifications via Python worker | ✅ Beyond requirement |
 
 ---
 
@@ -325,8 +326,6 @@ http://localhost:8080/swagger-ui/index.html
 
 ## 🔮 Future Enhancements
 
-- [ ] Email / SMS Notifications via Python worker
-- [ ] Role-Based Access Control (Admin / Patient)
 - [ ] Dashboard Charts & Analytics
 - [ ] Docker Compose for full-stack deployment
 - [ ] Unit Testing — JUnit & Mockito (Backend), pytest (Python)
