@@ -328,7 +328,6 @@ http://localhost:8080/swagger-ui/index.html
 ## 🔮 Future Enhancements
 
 - [ ] Dashboard Charts & Analytics
-- [ ] Docker Compose for full-stack deployment
 - [ ] Unit Testing — JUnit & Mockito (Backend), pytest (Python)
 
 ---
